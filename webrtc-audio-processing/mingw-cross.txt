@@ -1,0 +1,20 @@
+[binaries]
+c = 'x86_64-w64-mingw32-gcc'
+cpp = 'x86_64-w64-mingw32-g++'
+ar = 'x86_64-w64-mingw32-ar'
+strip = 'x86_64-w64-mingw32-strip'
+pkg-config = 'x86_64-w64-mingw32-pkg-config'
+windres = 'x86_64-w64-mingw32-windres'
+exe_wrapper = 'wine64' # 如果你想在编译后运行测试，需要安装 wine
+dlltool = 'x86_64-w64-mingw32-dlltool'
+
+[host_machine]
+system = 'windows'
+cpu_family = 'x86_64'
+cpu = 'x86_64'
+endian = 'little'
+
+
+[built-in options]
+cpp_link_args = ['-static-libgcc', '-static-libstdc++', '-Wl,-Bstatic', '-lwinpthread', '-Wl,-Bdynamic']
+c_link_args = ['-static-libgcc', '-Wl,-Bstatic', '-lwinpthread', '-Wl,-Bdynamic']
