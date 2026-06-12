@@ -10,14 +10,15 @@ cd rnnoise
 # 清理旧的编译结果
 make clean
 
-# 针对现代 x64 架构进行优化
+# 针对现代 x64 架构进行优化 -march=haswell -mtune=haswell -mfpmath=sse
 ./configure \
     --host=x86_64-w64-mingw32 \
     --prefix=$(pwd)/dist_windows_amd64 \
     --enable-shared \
     --disable-static \
+	--enable-x86-rtcd \
     LDFLAGS="-Wl,-no-undefined -static-libgcc" \
-    CFLAGS="-O3 -march=haswell -mtune=haswell -mfpmath=sse"
+    CFLAGS="-O3"
 
 # 3. 编译
 make -j$(nproc)
@@ -27,13 +28,14 @@ make install
 
 make clean
 
-# 针对现代 x64 架构进行优化
+# 针对现代 x64 架构进行优化 -march=haswell -mtune=haswell -mfpmath=sse
 ./configure \
     --prefix=$(pwd)/dist_linux_amd64 \
     --enable-shared \
     --disable-static \
+	--enable-x86-rtcd \
     LDFLAGS="-Wl,-no-undefined -static-libgcc" \
-    CFLAGS="-O3 -march=haswell -mtune=haswell -mfpmath=sse"
+    CFLAGS="-O3"
 
 # 3. 编译
 make -j$(nproc)
@@ -43,7 +45,7 @@ make install
 
 make clean
 
-# 针对现代 x64 架构进行优化
+# 针对现代 x64 架构进行优化  -march=armv8-a
 ./configure \
     --host=aarch64-linux-gnu \
     --prefix=$(pwd)/dist_linux_arm64 \
