@@ -13,11 +13,44 @@ make clean
 # 针对现代 x64 架构进行优化
 ./configure \
     --host=x86_64-w64-mingw32 \
-    --prefix=$(pwd)/dist_win64 \
+    --prefix=$(pwd)/dist_windows_amd64 \
     --enable-shared \
     --disable-static \
     LDFLAGS="-Wl,-no-undefined -static-libgcc" \
     CFLAGS="-O3 -march=haswell -mtune=haswell -mfpmath=sse"
+
+# 3. 编译
+make -j$(nproc)
+make install
+
+
+
+make clean
+
+# 针对现代 x64 架构进行优化
+./configure \
+    --prefix=$(pwd)/dist_linux_amd64 \
+    --enable-shared \
+    --disable-static \
+    LDFLAGS="-Wl,-no-undefined -static-libgcc" \
+    CFLAGS="-O3 -march=haswell -mtune=haswell -mfpmath=sse"
+
+# 3. 编译
+make -j$(nproc)
+make install
+
+
+
+make clean
+
+# 针对现代 x64 架构进行优化
+./configure \
+    --host=aarch64-linux-gnu \
+    --prefix=$(pwd)/dist_linux_arm64 \
+    --enable-shared \
+    --disable-static \
+    LDFLAGS="-Wl,-no-undefined -static-libgcc" \
+    CFLAGS="-O3 -march=armv8-a"
 
 # 3. 编译
 make -j$(nproc)
