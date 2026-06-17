@@ -5,8 +5,6 @@ cd webrtc-audio-processing
 # 编译并安装到指定位置
 meson setup build_windows_amd64 \
 	--cross-file '../mingw_cross_windows_amd64.txt' \
-	-Dcpp_args='["-DWEBRTC_WIN", "-DWEBRTC_ENABLE_SYMBOL_EXPORT", "-DWEBRTC_LIBRARY_IMPL", "-DWEBRTC_APM_DEBUG_DUMP"]' \
-	-Dcpp_link_args='["-Wl,--export-all-symbols", "-Wl,--allow-multiple-definition", "-static-libgcc", "-static-libstdc++"]' \
 	--default-library shared \
 	--buildtype release \
 	--prefix=${PWD}/dist_windows_amd64

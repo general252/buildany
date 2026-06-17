@@ -16,5 +16,12 @@ endian = 'little'
 
 
 [built-in options]
-cpp_link_args = ['-static-libgcc', '-static-libstdc++', '-Wl,-Bstatic', '-lwinpthread', '-Wl,-Bdynamic']
-c_link_args = ['-static-libgcc', '-Wl,-Bstatic', '-lwinpthread', '-Wl,-Bdynamic']
+cpp_args = ['-DWEBRTC_WIN', '-DWEBRTC_ENABLE_SYMBOL_EXPORT', '-DWEBRTC_LIBRARY_IMPL', '-DWEBRTC_APM_DEBUG_DUMP']
+cpp_link_args = [
+	'-Wl,--export-all-symbols', 
+    '-Wl,--allow-multiple-definition',
+	'-static',
+	'-static-libgcc',
+	'-static-libstdc++']
+
+c_link_args = ['-static', '-static-libgcc', '-static-libstdc++']
